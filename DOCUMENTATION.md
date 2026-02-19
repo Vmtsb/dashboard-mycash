@@ -45,16 +45,17 @@
 **Status**: ✅ Concluído
 
 ### O que foi implementado
-- Componente `Sidebar.tsx` refinado com paridade total ao Figma (Node 30:1516).
-- **Cores**: Item ativo com fundo Lime (`#D7FF00`) e ícone/texto pretos (`#080B12`).
-- **Dimensões**: Largura aberta ajustada para 300px; fechada 80px.
-- **Espaçamento**: Gap vertical de 56px entre Logo e Menu; 8px entre itens.
-- **Tipografia**: Uso rigoroso da Inter 18px Semi Bold para menus e 16px/14px para perfil.
-- **Toggle**: Botão flutuante (34px top) com sombra e rotação de ícone.
-- **Tooltip**: Feedback visual no estado colapsado.
-- **Responsividade**: Margem do conteúdo principal sincronizada com a largura da Sidebar (300px/80px).
+- Componente `Logo.tsx` [NEW]: Implementação da logo oficial usando vetores do Figma (Variantes Default e Small).
+- Componente `Sidebar.tsx` [REFINED]:
+    - **Estados Dinâmicos**: Transição entre 300px (aberto) e 80px (fechado) com comportamentos específicos de padding e gap.
+    - **Aberto**: GAP de 56px (Logo -> Menu), Botão toggle em `top: 34px`.
+    - **Fechado**: GAP de 56px mantido na estrutura mas itens centralizados, Botão toggle em `top: 35px`.
+    - **Ativos Oficiais**: Substituição de ícones genéricos e "M" por ícones e logo SVGs extraídos do Figma.
+    - **Avatar**: Uso da imagem oficial `736d...png` do design system.
+- **Tipografia**: Aplicação rigorosa da fonte Inter (600 Semi Bold e 400 Regular) em todos os textos de perfil e navegação.
 
 ### Arquivos criados/modificados
-- `src/components/layout/Sidebar.tsx` [NEW/REFINED]
+- `src/components/ui/Logo.tsx` [NEW]
+- `src/components/layout/Sidebar.tsx` [MODIFY]
 - `src/App.tsx` [MODIFY]
 - `tailwind.config.js` [MODIFY]
