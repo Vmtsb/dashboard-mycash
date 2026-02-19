@@ -38,4 +38,21 @@
 - `src/types/finance.ts` — Entidades do sistema.
 - `src/routes/index.tsx` — Definição de rotas.
 - `src/main.tsx` — Ponto de entrada com RouterProvider.
-- `src/App.tsx` — Layout base responsivo.
+- `src/App.tsx` — Layout base responsivo com suporte a Sidebar.
+
+## Prompt 2: Sistema de Layout e Navegação Desktop
+**Data**: 19/02/2026
+**Status**: ✅ Concluído
+
+### O que foi implementado
+- Componente `Sidebar.tsx` com estados expandido (280px) e colapsado (80px).
+- Lógica de alternância (toggle) com transições suaves de largura.
+- Destaque visual da rota ativa utilizando `NavLink` e tokens do design system (`neutral-1100` background e `brand-lime` ícone).
+- Sistema de Tooltips em CSS puro para o estado colapsado.
+- Card de perfil do usuário e botão de logout integrados.
+- Layout principal ajustado dinamicamente via margem esquerda.
+
+### Arquivos criados/modificados
+- `src/components/layout/Sidebar.tsx` [NEW]
+- `src/App.tsx` [MODIFY]
+- `src/index.css` (tokens herdados do tailwind)
