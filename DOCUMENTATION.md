@@ -45,14 +45,16 @@
 **Status**: ✅ Concluído
 
 ### O que foi implementado
-- Componente `Sidebar.tsx` com estados expandido (280px) e colapsado (80px).
-- Lógica de alternância (toggle) com transições suaves de largura.
-- Destaque visual da rota ativa utilizando `NavLink` e tokens do design system (`neutral-1100` background e `brand-lime` ícone).
-- Sistema de Tooltips em CSS puro para o estado colapsado.
-- Card de perfil do usuário e botão de logout integrados.
-- Layout principal ajustado dinamicamente via margem esquerda.
+- Componente `Sidebar.tsx` refinado com paridade total ao Figma (Node 30:1516).
+- **Cores**: Item ativo com fundo Lime (`#D7FF00`) e ícone/texto pretos (`#080B12`).
+- **Dimensões**: Largura aberta ajustada para 300px; fechada 80px.
+- **Espaçamento**: Gap vertical de 56px entre Logo e Menu; 8px entre itens.
+- **Tipografia**: Uso rigoroso da Inter 18px Semi Bold para menus e 16px/14px para perfil.
+- **Toggle**: Botão flutuante (34px top) com sombra e rotação de ícone.
+- **Tooltip**: Feedback visual no estado colapsado.
+- **Responsividade**: Margem do conteúdo principal sincronizada com a largura da Sidebar (300px/80px).
 
 ### Arquivos criados/modificados
-- `src/components/layout/Sidebar.tsx` [NEW]
+- `src/components/layout/Sidebar.tsx` [NEW/REFINED]
 - `src/App.tsx` [MODIFY]
-- `src/index.css` (tokens herdados do tailwind)
+- `tailwind.config.js` [MODIFY]

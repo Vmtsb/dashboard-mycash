@@ -23,7 +23,7 @@ function App() {
             <main
                 className={cn(
                     "transition-all duration-300 flex-1",
-                    isSidebarExpanded ? "ml-[280px]" : "ml-[80px]"
+                    isSidebarExpanded ? "ml-[300px]" : "ml-[80px]"
                 )}
             >
                 <div className="max-w-[1400px] mx-auto p-32">

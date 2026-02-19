@@ -36,6 +36,7 @@ export default {
                 2: '2px',
                 20: '20px',
                 100: '100px',
+                full: '100px',
             },
             fontFamily: {
                 sans: ['Inter', 'sans-serif'],
