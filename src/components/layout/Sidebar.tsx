@@ -1,18 +1,17 @@
 import { NavLink } from 'react-router-dom'
-
 import { clsx, type ClassValue } from 'clsx'
 import { twMerge } from 'tailwind-merge'
 import { Logo } from '../ui/Logo'
+import { ToggleIcon } from '../ui/ToggleIcon'
 
 function cn(...inputs: ClassValue[]) {
     return twMerge(clsx(inputs))
 }
 
-const imgMemberPai = "http://localhost:3845/assets/736d12d869971dbc2b38125be1a335e38f4eb1d1.png";
-const imgIcon = "http://localhost:3845/assets/45ff1e99509e600ea2bb73ed89dbc27248f172f2.svg";
-const imgIcon1 = "http://localhost:3845/assets/5c3826c0c5f103e92ec972a76dc2e8a08ae3067d.svg";
-const imgIcon2 = "http://localhost:3845/assets/fac6d07bbecdb86a7d018f2c1b7869bf19247e34.svg";
-const imgIcon3 = "http://localhost:3845/assets/13cb98173a649a88f59b5db849e5893317d6fdd7.svg";
+// Local assets
+const imgMemberPai = "/assets/sidebar/member-pai.png";
+const imgIconHome = "/assets/sidebar/icons/home.svg";
+const imgIconCards = "/assets/sidebar/icons/credit-card.svg";
 
 interface SidebarProps {
     isExpanded: boolean
@@ -20,18 +19,18 @@ interface SidebarProps {
 }
 
 const navItems = [
-    { icon: imgIcon, label: 'Home', path: '/' },
-    { icon: imgIcon1, label: 'Cartões', path: '/cards' },
+    { icon: imgIconHome, label: 'Home', path: '/' },
+    { icon: imgIconCards, label: 'Cartões', path: '/cards' },
 ]
 
 export function Sidebar({ isExpanded, onToggle }: SidebarProps) {
     return (
         <aside
             className={cn(
-                "fixed left-0 top-0 h-screen bg-white transition-all duration-300 z-50 flex flex-col p-32",
+                "fixed left-0 top-0 h-screen bg-white transition-all duration-300 z-50 flex flex-col py-32",
                 isExpanded
-                    ? "w-[300px] items-start border-r border-neutral-300"
-                    : "w-[80px] items-center"
+                    ? "w-[300px] items-start border-r border-neutral-300 px-32"
+                    : "w-[80px] items-center px-0"
             )}
         >
             {/* Header Container (Node 30:1503 / 30:1519) */}
@@ -109,16 +108,16 @@ export function Sidebar({ isExpanded, onToggle }: SidebarProps) {
             <button
                 onClick={onToggle}
                 className={cn(
-                    "absolute bg-white flex items-center justify-center p-4 rounded-full shadow-[0_4px_4px_0_rgba(0,0,0,0.25)] transition-all z-50",
-                    isExpanded ? "right-[-13px] top-[34px]" : "right-[-12px] top-[35px]"
+                    "absolute bg-white flex items-center justify-center rounded-full shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] transition-all z-50 w-24 h-24 p-0",
+                    "right-[-12px] top-[35px]"
                 )}
+                aria-label={isExpanded ? "Collapse sidebar" : "Expand sidebar"}
             >
-                <div className={cn("transition-all duration-300 flex items-center justify-center")}>
-                    <img
-                        src={isExpanded ? imgIcon2 : imgIcon3}
-                        alt="Toggle Sidebar"
-                        className="w-16 h-16"
-                    />
+                <div className={cn(
+                    "transition-transform duration-300 flex items-center justify-center",
+                    isExpanded ? "rotate-0" : "rotate-180" // rotate-0 points left (provided SVG), rotate-180 points right
+                )}>
+                    <ToggleIcon />
                 </div>
             </button>
         </aside>

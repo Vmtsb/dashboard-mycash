@@ -50,12 +50,15 @@
     - **Estados Dinâmicos**: Transição entre 300px (aberto) e 80px (fechado) com comportamentos específicos de padding e gap.
     - **Aberto**: GAP de 56px (Logo -> Menu), Botão toggle em `top: 34px`.
     - **Fechado**: GAP de 56px mantido na estrutura mas itens centralizados, Botão toggle em `top: 35px`.
+    - **Ícone Toggle** [FIX]: Implementação direta de SVG oficial para eliminar distorção e correção da lógica de rotação condicional (`isExpanded`).
     - **Ativos Oficiais**: Substituição de ícones genéricos e "M" por ícones e logo SVGs extraídos do Figma.
     - **Avatar**: Uso da imagem oficial `736d...png` do design system.
 - **Tipografia**: Aplicação rigorosa da fonte Inter (600 Semi Bold e 400 Regular) em todos os textos de perfil e navegação.
 
+- **Ativos Locais** [FIX]: Migração de todas as URLs `localhost:3845` (servidor MCP) para `public/assets/sidebar` local, resolvendo o problema de imagens quebradas no navegador (`localhost:5173`).
+- **Build**: Verificado e gerado com sucesso após a migração dos ativos.
+
 ### Arquivos criados/modificados
-- `src/components/ui/Logo.tsx` [NEW]
+- `public/assets/sidebar/**` [NEW]
+- `src/components/ui/Logo.tsx` [MODIFY]
 - `src/components/layout/Sidebar.tsx` [MODIFY]
-- `src/App.tsx` [MODIFY]
-- `tailwind.config.js` [MODIFY]
