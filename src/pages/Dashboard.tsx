@@ -1,5 +1,6 @@
 import { DashboardHeader } from '../components/layout/DashboardHeader';
 import { SummaryCards } from '../components/cards/SummaryCards';
+import { ExpensesByCategoryCarousel } from '../components/cards/ExpensesByCategoryCarousel';
 
 export default function Dashboard() {
     return (
@@ -8,6 +9,7 @@ export default function Dashboard() {
 
             <div className="flex-1 pb-8 flex flex-col gap-6">
                 <SummaryCards />
+                <ExpensesByCategoryCarousel />
 
                 {/* Future widgets: charts, tables, etc. */}
             </div>
