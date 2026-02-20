@@ -1,8 +1,9 @@
 import { createBrowserRouter } from 'react-router-dom'
 import App from '../App'
 
+import Dashboard from '../pages/Dashboard'
+
 // Temporary components for routing setup
-const Dashboard = () => <div className="p-8"><h1>Dashboard</h1></div>
 const Goals = () => <div className="p-8"><h1>Objetivos</h1></div>
 const Cards = () => <div className="p-8"><h1>Cartões</h1></div>
 const Transactions = () => <div className="p-8"><h1>Transações</h1></div>
