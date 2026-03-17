@@ -16,7 +16,7 @@ export function ExpenseCard() {
     const animatedExpenses = useCountAnimation(expenses);
 
     return (
-        <div className="bg-white border border-[#e5e7eb] flex flex-1 flex-col gap-8 items-start justify-center min-h-0 min-w-0 p-6 relative rounded-[20px]">
+        <div className="bg-white border border-[#e5e7eb] flex flex-1 flex-col gap-4 md:gap-8 items-start justify-center shrink-0 p-4 md:p-6 relative rounded-[20px]">
             {/* Icon */}
             <div className="flex items-center justify-center w-6 h-6 text-red-500">
                 <ArrowUpRight size={24} strokeWidth={2} />

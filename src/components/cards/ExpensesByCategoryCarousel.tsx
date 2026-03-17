@@ -8,9 +8,39 @@ export function ExpensesByCategoryCarousel() {
     const scrollRef = useRef<HTMLDivElement>(null);
     const [isHovered, setIsHovered] = useState(false);
     const [isDragging, setIsDragging] = useState(false);
+    const [canScrollLeft, setCanScrollLeft] = useState(false);
+    const [canScrollRight, setCanScrollRight] = useState(false);
     const dragStart = useRef<{ x: number; scrollLeft: number } | null>(null);
 
     const categories = calculateExpensesByCategory();
+
+    // --------------------------------------------------- scroll state tracker
+    const updateScrollState = useCallback(() => {
+        const el = scrollRef.current;
+        if (!el) return;
+        const left = el.scrollLeft;
+        const maxScroll = el.scrollWidth - el.clientWidth;
+        setCanScrollLeft(left > 2);
+        setCanScrollRight(left < maxScroll - 2);
+    }, []);
+
+    useEffect(() => {
+        const el = scrollRef.current;
+        if (!el) return;
+
+        updateScrollState();
+
+        el.addEventListener('scroll', updateScrollState, { passive: true });
+
+        // Also re-check when container resizes
+        const ro = new ResizeObserver(updateScrollState);
+        ro.observe(el);
+
+        return () => {
+            el.removeEventListener('scroll', updateScrollState);
+            ro.disconnect();
+        };
+    }, [updateScrollState, categories.length]);
 
     // ------------------------------------------------------------------ scroll
     const scrollBy = useCallback((amount: number) => {
@@ -30,7 +60,7 @@ export function ExpensesByCategoryCarousel() {
         return () => el.removeEventListener('wheel', handleWheel);
     }, [handleWheel]);
 
-    // ----------------------------------------------------------------- drag
+    // ------------------------------------------------------------------- drag
     const handleMouseDown = (e: React.MouseEvent) => {
         if (!scrollRef.current) return;
         setIsDragging(true);
@@ -57,61 +87,66 @@ export function ExpensesByCategoryCarousel() {
         );
     }
 
+    const showLeft = isHovered && canScrollLeft;
+    const showRight = isHovered && canScrollRight;
+
     return (
         <div
-            className="relative w-full"
+            className="relative w-full overflow-hidden"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => { setIsHovered(false); setIsDragging(false); }}
         >
-            {/* Left fade mask */}
+            {/* Left fade mask — only when there's content to scroll left */}
             <div
-                className="pointer-events-none absolute left-0 top-0 bottom-0 w-12 z-10"
+                className="pointer-events-none absolute left-0 top-0 bottom-0 w-12 z-10 transition-opacity duration-200"
                 style={{
                     background: 'linear-gradient(to right, rgba(229,231,235,1) 0%, transparent 100%)',
+                    opacity: canScrollLeft ? 1 : 0,
                 }}
             />
-            {/* Right fade mask */}
+            {/* Right fade mask — only when there's content to scroll right */}
             <div
-                className="pointer-events-none absolute right-0 top-0 bottom-0 w-12 z-10"
+                className="pointer-events-none absolute right-0 top-0 bottom-0 w-12 z-10 transition-opacity duration-200"
                 style={{
                     background: 'linear-gradient(to left, rgba(229,231,235,1) 0%, transparent 100%)',
+                    opacity: canScrollRight ? 1 : 0,
                 }}
             />
 
-            {/* Left arrow — desktop only */}
+            {/* Left arrow — desktop only, visible only when can scroll left */}
             <button
                 onClick={() => scrollBy(-220)}
                 className={`
                     hidden lg:flex
-                    absolute left-0 top-1/2 -translate-y-1/2 -translate-x-3 z-20
+                    absolute left-1 top-1/2 -translate-y-1/2 z-20
                     items-center justify-center
-                    w-9 h-9 rounded-full bg-white shadow-md
-                    border border-[#e5e7eb]
+                    w-9 h-9 rounded-full bg-white
+                    border-2 border-[#e5e7eb]
                     transition-all duration-200
-                    hover:shadow-lg hover:border-[#D7FF00]
-                    ${isHovered ? 'opacity-100 scale-100' : 'opacity-0 scale-90 pointer-events-none'}
+                    hover:border-[#D7FF00]
+                    ${showLeft ? 'opacity-100 scale-100' : 'opacity-0 scale-90 pointer-events-none'}
                 `}
                 aria-label="Anterior"
             >
-                <ChevronLeft size={18} className="text-[#080b12]" />
+                <ChevronLeft size={18} strokeWidth={1.5} className="text-[#080b12]" />
             </button>
 
-            {/* Right arrow — desktop only */}
+            {/* Right arrow — desktop only, visible only when can scroll right */}
             <button
                 onClick={() => scrollBy(220)}
                 className={`
                     hidden lg:flex
-                    absolute right-0 top-1/2 -translate-y-1/2 translate-x-3 z-20
+                    absolute right-1 top-1/2 -translate-y-1/2 z-20
                     items-center justify-center
-                    w-9 h-9 rounded-full bg-white shadow-md
-                    border border-[#e5e7eb]
+                    w-9 h-9 rounded-full bg-white
+                    border-2 border-[#e5e7eb]
                     transition-all duration-200
-                    hover:shadow-lg hover:border-[#D7FF00]
-                    ${isHovered ? 'opacity-100 scale-100' : 'opacity-0 scale-90 pointer-events-none'}
+                    hover:border-[#D7FF00]
+                    ${showRight ? 'opacity-100 scale-100' : 'opacity-0 scale-90 pointer-events-none'}
                 `}
                 aria-label="Próximo"
             >
-                <ChevronRight size={18} className="text-[#080b12]" />
+                <ChevronRight size={18} strokeWidth={1.5} className="text-[#080b12]" />
             </button>
 
             {/* Scrollable track */}
@@ -119,8 +154,7 @@ export function ExpensesByCategoryCarousel() {
                 ref={scrollRef}
                 className={`
                     flex flex-row gap-4 overflow-x-auto
-                    px-6 py-2
-                    scroll-smooth
+                    px-2 py-2
                     [scrollbar-width:none] [&::-webkit-scrollbar]:hidden
                     ${isDragging ? 'cursor-grabbing select-none' : 'cursor-grab'}
                 `}

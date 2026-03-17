@@ -84,9 +84,10 @@ export function CategoryDonutCard({ category, value, percentage, colorIndex }: C
     return (
         <div
             className="
-                bg-white border border-[#e5e7eb] rounded-[20px] p-6 
-                flex flex-col gap-3 items-center justify-center 
-                shrink-0 w-[185px]
+                bg-white border border-[#e5e7eb] rounded-[20px] p-4 sm:p-5 lg:p-6 
+                flex flex-col gap-2 sm:gap-3 items-center justify-center 
+                shrink-0
+                w-[130px] min-[400px]:w-[145px] sm:w-[165px] lg:w-[185px]
                 transition-colors duration-200
                 hover:border-[#D7FF00]
                 cursor-default
@@ -98,14 +99,14 @@ export function CategoryDonutCard({ category, value, percentage, colorIndex }: C
             </div>
 
             {/* Text */}
-            <div className="flex flex-col gap-1 items-center text-center w-full text-[#080b12]">
+            <div className="flex flex-col gap-0.5 sm:gap-1 items-center text-center w-full text-[#080b12]">
                 <p
-                    className="font-normal text-[14px] w-full"
+                    className="font-normal text-[12px] sm:text-[14px] w-full"
                     style={{ lineHeight: '20px', letterSpacing: '0.3px' }}
                 >
-                    <span className="block truncate">{category}</span>
+                    <span className="block truncate px-1">{category}</span>
                 </p>
-                <p className="font-bold text-[20px]" style={{ lineHeight: '28px' }}>
+                <p className="font-bold text-[16px] sm:text-[18px] lg:text-[20px]" style={{ lineHeight: 'normal' }}>
                     {formatCurrency(value)}
                 </p>
             </div>

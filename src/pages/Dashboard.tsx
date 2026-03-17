@@ -1,6 +1,7 @@
 import { DashboardHeader } from '../components/layout/DashboardHeader';
 import { SummaryCards } from '../components/cards/SummaryCards';
 import { ExpensesByCategoryCarousel } from '../components/cards/ExpensesByCategoryCarousel';
+import { FinancialFlowChart } from '../components/charts/FinancialFlowChart';
 
 export default function Dashboard() {
     return (
@@ -8,8 +9,12 @@ export default function Dashboard() {
             <DashboardHeader />
 
             <div className="flex-1 pb-8 flex flex-col gap-6">
-                <SummaryCards />
                 <ExpensesByCategoryCarousel />
+                <SummaryCards />
+                
+                <div className="w-full mt-2">
+                    <FinancialFlowChart />
+                </div>
 
                 {/* Future widgets: charts, tables, etc. */}
             </div>
