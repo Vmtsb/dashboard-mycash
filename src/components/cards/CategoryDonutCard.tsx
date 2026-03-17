@@ -84,7 +84,7 @@ export function CategoryDonutCard({ category, value, percentage, colorIndex }: C
     return (
         <div
             className="
-                bg-white border border-[#e5e7eb] rounded-[20px] p-4 sm:p-5 lg:p-6 
+                bg-white border border-[#e5e7eb] rounded-[20px] p-32 
                 flex flex-col gap-2 sm:gap-3 items-center justify-center 
                 shrink-0
                 w-[130px] min-[400px]:w-[145px] sm:w-[165px] lg:w-[185px]
